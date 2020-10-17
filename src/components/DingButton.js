@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Button, Image } from 'react-native';
+import *  as React from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Animated } from 'react-native';
+import DingButtonContent from "./DingButtonContent"
 import { Audio } from 'expo-av';
 const soundObject = new Audio.Sound();
-const DingButton = () => {
-  const [clicked, setClicked] = useState(false)
+
+export default function DingButton() {
+  const [clicked, setClicked] = React.useState(false)
   const setUpAudio = async () => {
     await soundObject.loadAsync(require('../assets/ding.mp3'));
+  }  
+  const toggleClick = () => {
+    setClicked(!clicked)
   }
-  useEffect(() => {
+  React.useEffect(() => {
     setUpAudio()
     return () => {
       soundObject.unloadAsync()
@@ -36,70 +41,49 @@ const DingButton = () => {
       }, 5000);
     });
   }
-
   return (
-
-    <TouchableOpacity onPress={() => toggleButton()} activeOpacity={1} >
-      <View style={clicked ? styles.buttonPressed : styles.buttonNotPressed}>
-        <ImageBackground
-          imageStyle={styles.ringImage}
-          style={styles.imageBackgroundStyle}
-          source={require("../assets/ring_inscription.png")}
+    <View style={{marginLeft:0, marginTop:0}}>
+      <TouchableOpacity 
+        style={clicked ? styles.circleClicked: styles.circleNotClicked}
+        activeOpacity={clicked? 1: 0.4}
+        onPress={toggleButton}
         >
-          <View style={{ width: 150, height: 150, justifyContent: "center" }}>
-
-            <Text style={{ textAlign: "center" }}>Ding</Text>
-          </View>
-        </ImageBackground>
-      </View>
-
-    </TouchableOpacity >
-
+        <DingButtonContent/>
+      
+      </TouchableOpacity>
+    </View>
   );
 }
-const constStyles = StyleSheet.create({
-  imageBackgroundStyle: {
-    resizeMode: 'cover', justifyContent: 'center', alignItems: 'center'
-  },
-  buttonStyle: {
-    width: 150,
-    height: 150,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    borderRadius: 100,
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  dingTitle: {
-    fontSize: 20,
-  },
 
-})
-
+const circle = {
+    width:200,
+    height:200,
+    borderRadius:100,
+    backgroundColor: "#DAA520",
+    shadowColor:"gray",
+    borderColor:"#ECD28F",
+    borderWidth:5
+    
+  }
 const styles = StyleSheet.create({
-  buttonNotPressed: {
-    ...constStyles.buttonStyle,
+  circleClicked: {
+    ...circle,
+    opacity: 0.5,
+    shadowOpacity:0,
+    shadowOffset: {
+      width:0,
+      height:0
+    },
+    shadowRadius:3
   },
-  buttonPress: {
-    ...constStyles.buttonStyle,
+  circleNotClicked: {
+    ...circle,
+    opacity: 1,
+    shadowOpacity:0.5,
+    shadowOffset: {
+      width:3,
+      height:3
+    },
+    shadowRadius:3
   },
-  dingTitleClicked: {
-    ...constStyles.dingTitle,
-  },
-  dingTitleNotClicked: {
-    ...constStyles.dingTitle,
-  },
-  ringImage: {
-    width: 150,
-    height: 150,
-    elevation: 4,
-    borderRadius: 100
-  },
-})
-
-export default DingButton;
+  });

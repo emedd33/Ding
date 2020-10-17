@@ -3,12 +3,9 @@ import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from
 import DingButton from '../components/DingButton';
 
 const image = require("../assets/background_image.jpg");
-const ring = "https://i.pinimg.com/originals/3b/31/e3/3b31e34debef0e079a148d8941af59de.jpg";
 const DingScreen = () => {
     return (
         <View style={styles.container}>
-
-
             <ImageBackground
                 source={image}
                 style={{
@@ -17,9 +14,8 @@ const DingScreen = () => {
 
                 }}
             >
-
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <DingButton />
+                    <DingButton/>
                 </View>
 
             </ImageBackground >
