@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Animated } f
 import DingButtonContent from "./DingButtonContent"
 import { Audio } from 'expo-av';
 import RayLight from './RayLight';
+import Congratulation from "./Congratulation"
+import Fireworks from 'react-native-fireworks'
 const soundObject = new Audio.Sound();
 
 export default function DingButton() {
@@ -11,9 +13,6 @@ export default function DingButton() {
   const setUpAudio = async () => {
     await soundObject.loadAsync(require('../assets/ding.mp3'));
   }  
-  const toggleClick = () => {
-    setClicked(!clicked)
-  }
   React.useEffect(() => {
     setUpAudio()
     return () => {
@@ -38,17 +37,27 @@ export default function DingButton() {
   function unclickAfter5Seconds() {
     return new Promise(resolve => {
       setTimeout(() => {
-        setClicked(false)
         console.log("ended")
       }, 5000);
     });
   }
   const renderRayLight = () => <RayLight/>
+  const renderFireWorks = () => <Fireworks 
+      speed={1} 
+      colors={['#DAA520','#F0E68C','#EEE8AA','#FFD700','#FFDF00']}
+      density={4}
+      iterations={100}
+     />
   return (
-    <View style={{marginLeft:0, marginTop:0}}>
+    <View style={{marginLeft:0, marginTop:0, justifyContent:"center", alignItems:"center"}}>
+      {clicked?<Congratulation visible={true}/>:<Congratulation visible={false}/>}
+      {clicked? 
+      renderFireWorks()
+      : null
+      }
       <TouchableOpacity 
         style={clicked ? styles.circleClicked: styles.circleNotClicked}
-        activeOpacity={clicked? 1: 0.4}
+        activeOpacity={clicked? 0: 0.4}
         onPress={toggleButton}
         >
         <DingButtonContent/>

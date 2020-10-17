@@ -14,9 +14,9 @@ const DingScreen = () => {
 
                 }}
             >
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+
                     <DingButton/>
-                </View>
+               
 
             </ImageBackground >
 
