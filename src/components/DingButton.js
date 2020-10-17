@@ -2,9 +2,11 @@ import *  as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Animated } from 'react-native';
 import DingButtonContent from "./DingButtonContent"
 import { Audio } from 'expo-av';
+import RayLight from './RayLight';
 const soundObject = new Audio.Sound();
 
 export default function DingButton() {
+  const RayArray = Array.from(Array(100).keys())
   const [clicked, setClicked] = React.useState(false)
   const setUpAudio = async () => {
     await soundObject.loadAsync(require('../assets/ding.mp3'));
@@ -41,6 +43,7 @@ export default function DingButton() {
       }, 5000);
     });
   }
+  const renderRayLight = () => <RayLight/>
   return (
     <View style={{marginLeft:0, marginTop:0}}>
       <TouchableOpacity 
@@ -49,6 +52,9 @@ export default function DingButton() {
         onPress={toggleButton}
         >
         <DingButtonContent/>
+        {clicked? 
+        RayArray.map(() => renderRayLight()): 
+        null}
       
       </TouchableOpacity>
     </View>
