@@ -7,7 +7,7 @@ export default function Congratulation({ visible }) {
   React.useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 3000,
+      duration: 2000,
       useNativeDriver: false
     }).start()
   })
@@ -29,7 +29,7 @@ export default function Congratulation({ visible }) {
             }}
           >
 
-            <View style={{ backgroundColor: "gray", opacity: 0.7, borderRadius: 10 }}>
+            <View style={{ opacity: 0.8, borderRadius: 10, minWidth: 300 }}>
 
               <CongratulationText />
             </View>
@@ -54,6 +54,12 @@ const styles = StyleSheet.create({
     height: 100,
     opacity: 1,
     margin: 100,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    shadowRadius: 3
 
   }
 });

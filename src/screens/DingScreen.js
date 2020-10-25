@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, Dimensions } from 'react-native';
 import DingButton from '../components/DingButton';
 import Congratulation from "../components/Congratulation"
+import FireWorks from "../components/Fireworks"
 const image = require("../assets/background_image.jpg");
 const DingScreen = () => {
     const windowWidth = Dimensions.get('window').width;
@@ -18,9 +19,9 @@ const DingScreen = () => {
                 }}
             >
                 <View style={styles.congratulationContainer}>
+
                     <Congratulation visible={clicked} />
                 </View>
-
                 <View style={styles.buttonContainer}>
                     <DingButton clicked={clicked} setClicked={setClicked} />
                 </View>
@@ -48,6 +49,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
+    },
+    fireworksContainer: {
+        flex: 2
     }
 });
 export default DingScreen;
