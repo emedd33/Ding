@@ -1,6 +1,8 @@
 import *  as React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Animated } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Animated, Dimensions } from 'react-native';
 import CongratulationText from "./CongratulationText"
+const windowWidth = Dimensions.get('window').width;
+
 export default function Congratulation({ visible }) {
   const image = require("../assets/wow.jpg");
   const fadeAnim = React.useRef(new Animated.Value(0)).current
@@ -29,7 +31,7 @@ export default function Congratulation({ visible }) {
             }}
           >
 
-            <View style={{ opacity: 0.8, borderRadius: 10, minWidth: 300 }}>
+            <View style={{ opacity: 0.8, borderRadius: 10, minWidth: 0.9 * windowWidth }}>
 
               <CongratulationText />
             </View>

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, Dimensions } from 'react-native';
 import DingButton from '../components/DingButton';
 import Congratulation from "../components/Congratulation"
-import FireWorks from "../components/Fireworks"
+import Fireworks from 'react-native-fireworks'
 const image = require("../assets/background_image.jpg");
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const DingScreen = () => {
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
     const [clicked, setClicked] = useState(false)
     return (
         <View style={styles.container}>
@@ -18,6 +18,7 @@ const DingScreen = () => {
 
                 }}
             >
+                {clicked ? <Fireworks height={windowHeight * 0.8} width={windowWidth * 0.8} /> : null}
                 <View style={styles.congratulationContainer}>
 
                     <Congratulation visible={clicked} />
@@ -38,7 +39,10 @@ const styles = StyleSheet.create({
     container: {
         display: "flex",
         justifyContent: "center",
+        backgroundColor: "black",
         alignItems: "center",
+        width: windowWidth,
+        height: windowHeight
     },
     buttonContainer: {
         flex: 2,
